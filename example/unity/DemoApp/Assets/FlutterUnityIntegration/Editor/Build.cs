@@ -122,9 +122,6 @@ namespace FlutterUnityIntegration.Editor
 
         private static void BuildWindowsOS(String path)
         {
-            // Switch to Android standalone build.
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
-
             if (Directory.Exists(path))
                 Directory.Delete(path, true);
 
@@ -139,7 +136,7 @@ namespace FlutterUnityIntegration.Editor
                 options = BuildOptions.AllowDebugging
             };
 
-            // Switch to Android standalone build.
+            // Switch to Windows standalone build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
 
             // build addressable
@@ -154,23 +151,19 @@ namespace FlutterUnityIntegration.Editor
 
         private static void BuildWebGL(String path)
         {
-            // Switch to Android standalone build.
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
-
             if (Directory.Exists(path))
                 Directory.Delete(path, true);
 
             if (Directory.Exists(WebExportPath))
                 Directory.Delete(WebExportPath, true);
 
-            // EditorUserBuildSettings. = true;
 
             var playerOptions = new BuildPlayerOptions();
             playerOptions.scenes = GetEnabledScenes();
             playerOptions.target = BuildTarget.WebGL;
             playerOptions.locationPathName = path;
 
-            // Switch to Android standalone build.
+            // Switch to WebGL build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WebGL, BuildTarget.WebGL);
             // build addressable
             ExportAddressables();
