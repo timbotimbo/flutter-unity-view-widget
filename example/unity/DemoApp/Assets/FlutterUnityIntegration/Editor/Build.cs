@@ -31,25 +31,24 @@ namespace FlutterUnityIntegration.Editor
         [MenuItem("Flutter/Export Android (Debug) %&n", false, 101)]
         public static void DoBuildAndroidLibraryDebug()
         {
-            DoBuildAndroid(Path.Combine(APKPath, "unityLibrary"), false, false);
-
-            // Copy over resources from the launcher module that are used by the library
-            Copy(Path.Combine(APKPath + "/launcher/src/main/res"), Path.Combine(AndroidExportPath, "src/main/res"));
+            CallDoBuildAndroid(isPlugin: false, isReleaseBuild: false);
         }
 
         [MenuItem("Flutter/Export Android (Release) %&m", false, 102)]
         public static void DoBuildAndroidLibraryRelease()
         {
-            DoBuildAndroid(Path.Combine(APKPath, "unityLibrary"), false, true);
-
-            // Copy over resources from the launcher module that are used by the library
-            Copy(Path.Combine(APKPath + "/launcher/src/main/res"), Path.Combine(AndroidExportPath, "src/main/res"));
+            CallDoBuildAndroid(isPlugin: false, isReleaseBuild: true);
         }
 
         [MenuItem("Flutter/Export Android Plugin %&p", false, 103)]
         public static void DoBuildAndroidPlugin()
         {
-            DoBuildAndroid(Path.Combine(APKPath, "unityLibrary"), true, true);
+            CallDoBuildAndroid(isPlugin: true, isReleaseBuild: true);
+        }
+
+        private static void CallDoBuildAndroid(bool isPlugin, bool isReleaseBuild)
+        {
+            DoBuildAndroid(Path.Combine(APKPath, "unityLibrary"), isPlugin, isReleaseBuild);
 
             // Copy over resources from the launcher module that are used by the library
             Copy(Path.Combine(APKPath + "/launcher/src/main/res"), Path.Combine(AndroidExportPath, "src/main/res"));
