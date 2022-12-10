@@ -323,6 +323,20 @@ body { padding: 0; margin: 0; overflow: hidden; }
             buildText = buildText.Replace("implementation fileTree(dir: 'libs', include: ['*.jar'])", "implementation(name: 'unity-classes', ext:'jar')");
             buildText = buildText.Replace(" + unityStreamingAssets.tokenize(', ')", "");
 
+            // add missing buildTypes to build.gradle
+            if(!buildText.Contains("buildTypes {"))
+            {
+                buildText = buildText.Replace("packagingOptions {", 
+  @"buildTypes {
+        release {}
+        debug {}
+        profile {}
+        innerTest {}
+    }
+
+    packagingOptions {");
+            }
+
             if(isPlugin)
             {
                 buildText = Regex.Replace(buildText, @"implementation\(name: 'androidx.* ext:'aar'\)", "\n");
