@@ -48,6 +48,16 @@ namespace FlutterUnityIntegration.Editor
 
         private static void CallDoBuildAndroid(bool isPlugin, bool isReleaseBuild)
         {
+            //check if the Unity project is in the expected location
+            string flutterAndroid = Path.GetFullPath(Path.Combine(ProjectPath, "../../android"));
+            if (!Directory.Exists(flutterAndroid))
+            {
+                Debug.LogError("Could not find a flutter android project. Make sure the unity project folder is located in the right location. <flutter-project>/unity/<unity-project-folder>");
+                Debug.Log("-- Android Build: Failed --");
+				//abort because android gradle & manifest files can't be edited.
+                return;
+            }
+
             DoBuildAndroid(Path.Combine(APKPath, "unityLibrary"), isPlugin, isReleaseBuild);
 
             // Copy over resources from the launcher module that are used by the library
@@ -81,6 +91,15 @@ namespace FlutterUnityIntegration.Editor
         [MenuItem("Flutter/Export Web GL %&w", false, 301)]
         public static void DoBuildWebGL()
         {
+            //check if the Unity project is in the expected location
+            string flutterWeb = Path.GetFullPath(Path.Combine(ProjectPath, "../../web"));
+            if (!Directory.Exists(flutterWeb))
+            {
+                Debug.LogError("Could not find a flutter web project. Make sure the unity project folder is located in the right location. <flutter-project>/unity/<unity-project-folder>");
+                Debug.Log("-- WebGL Build: Failed --");
+				//abort because flutter index.html can't be edited.
+                return;
+            }
             BuildWebGL(WebExportPath);
         }
 
