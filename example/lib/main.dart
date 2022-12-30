@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unity_widget_example/screens/global_api_screen.dart';
 import 'package:flutter_unity_widget_example/screens/no_interaction_screen.dart';
 import 'package:flutter_unity_widget_example/screens/orientation_screen.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/simple': (context) => const SimpleScreen(),
         '/loader': (context) => const LoaderScreen(),
         '/orientation': (context) => const OrientationScreen(),
+        '/global': (context) => const GlobalApiScreen(),
         '/api': (context) => const ApiScreen(),
         '/none': (context) => const NoInteractionScreen(),
       },
