@@ -58,7 +58,7 @@ class _NoInteractionScreenState extends State<NoInteractionScreen> {
                   onPressed: () {
                     Navigator.of(context).pushNamed('/simple');
                   },
-                  child: const Text('Switch Flutter Screen'),
+                  child: const Text('Push simple screen demo'),
                 ),
               ),
             ),

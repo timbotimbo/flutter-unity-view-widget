@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
@@ -38,16 +40,19 @@ class _MenuScreenState extends State<MenuScreen> {
           'This example shows various native API exposed by the library',
       route: '/api',
       title: 'Native exposed API demo',
+      mobileOnly: true,
     ),
     _MenuListItem(
       title: 'Test Orientation',
       route: '/orientation',
       description: 'test orientation change',
+      mobileOnly: true,
     ),
     _MenuListItem(
       title: 'Global Controller',
       route: '/global',
       description: 'Controller without a UnityWidget',
+      mobileOnly: true,
     ),
   ];
 
@@ -59,11 +64,13 @@ class _MenuScreenState extends State<MenuScreen> {
         actions: [
           Row(
             children: [
-              const Text("Log controllers"),
-              Checkbox(
-                value: _logControllers,
-                onChanged: _toggleLogs,
-              ),
+              if (!kIsWeb && !Platform.isWindows) ...[
+                const Text("Log controllers"),
+                Checkbox(
+                  value: _logControllers,
+                  onChanged: _toggleLogs,
+                ),
+              ],
             ],
           ),
         ],
@@ -72,15 +79,20 @@ class _MenuScreenState extends State<MenuScreen> {
         child: ListView.builder(
           itemCount: menus.length,
           itemBuilder: (BuildContext context, int i) {
-            return ListTile(
-              title: Text(menus[i].title),
-              subtitle: Text(menus[i].description),
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  menus[i].route,
-                );
-              },
-            );
+            // Hide menu options that are not relevant to the current platform.
+            if ((kIsWeb || Platform.isWindows) && menus[i].mobileOnly) {
+              return const SizedBox();
+            } else {
+              return ListTile(
+                title: Text(menus[i].title),
+                subtitle: Text(menus[i].description),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    menus[i].route,
+                  );
+                },
+              );
+            }
           },
         ),
       ),
@@ -108,14 +120,16 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // Use the singleton to listen to any UnityController in the app
   void _listenToControllers() {
+    if (kIsWeb || Platform.isWindows) {
+      return;
+    }
     //listen to any messages sent from Unity to Flutter
     _messageStream =
         FlutterUnityController.instance.onUnityMessage().listen((event) {
       if (!_logControllers) {
         return;
       }
-      print(
-          '$_prefix Received message from unity: ${event.value.toString()}');
+      print('$_prefix Received message from unity: ${event.value.toString()}');
     });
 
     //Handle events from the UnityController
@@ -152,8 +166,7 @@ class _MenuScreenState extends State<MenuScreen> {
             sceneData = null;
           }
           if (sceneData != null) {
-            print(
-                '$_prefix Unity scene loaded ${sceneData.buildIndex ?? ""}');
+            print('$_prefix Unity scene loaded ${sceneData.buildIndex ?? ""}');
           } else {
             print('$_prefix Unknown scene loaded.');
           }
@@ -175,10 +188,12 @@ class _MenuListItem {
   final String title;
   final String description;
   final String route;
+  final bool mobileOnly;
 
   _MenuListItem({
     required this.title,
     required this.description,
     required this.route,
+    this.mobileOnly = false,
   });
 }
