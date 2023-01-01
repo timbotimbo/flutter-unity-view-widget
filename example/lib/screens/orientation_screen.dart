@@ -38,13 +38,14 @@ class _OrientationScreenState extends State<OrientationScreen> {
               onUnityMessage: onUnityMessage,
               useAndroidViewSurface: true,
             ),
-            PointerInterceptor(
-              child: Positioned(
-                bottom: 20,
-                left: 20,
-                right: 20,
-                child: Card(
-                  elevation: 10,
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Card(
+                elevation: 10,
+                child: PointerInterceptor(
+                  // PointerInterceptor is for web only and will be ignored on mobile
                   child: Column(
                     children: <Widget>[
                       ElevatedButton(

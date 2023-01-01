@@ -49,13 +49,14 @@ class _SimpleScreenState extends State<SimpleScreen> {
                 useAndroidViewSurface: false,
                 borderRadius: const BorderRadius.all(Radius.circular(70)),
               ),
-              PointerInterceptor(
-                child: Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Card(
-                    elevation: 10,
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Card(
+                  elevation: 10,
+                  child: PointerInterceptor(
+                    // PointerInterceptor is for web only and will be ignored on mobile
                     child: Column(
                       children: <Widget>[
                         const Padding(
