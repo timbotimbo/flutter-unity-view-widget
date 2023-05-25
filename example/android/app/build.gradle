@@ -31,7 +31,9 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     compileSdkVersion 33
     // compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    
+    // ndkVersion disabled to avoid possible conflicts with Unity ndk, which should be set in android/local.properties (ndk.dir= ... )
+    // ndkVersion flutter.ndkVersion
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
