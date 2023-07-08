@@ -208,11 +208,17 @@ namespace FlutterUnityIntegration.Editor
                 // remove this line if you don't use a debugger and you want to speed up the flutter build
                 playerOptions.options = BuildOptions.AllowDebugging | BuildOptions.Development;
             }
+
+            Il2CppCompilerConfiguration compilerConfig = isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug;
+            #if UNITY_2021_2_OR_NEWER
+                PlayerSettings.SetIl2CppCompilerConfiguration(UnityEditor.Build.NamedBuildTarget.Android, compilerConfig);
+            #else
+			    PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.Android, compilerConfig);
+            #endif
+
             #if UNITY_2022_1_OR_NEWER
-                PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.Android, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.Android, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
             #elif UNITY_2021_2_OR_NEWER
-                PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.Android, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 EditorUserBuildSettings.il2CppCodeGeneration = UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize;
             #endif
 
@@ -368,11 +374,16 @@ body { padding: 0; margin: 0; overflow: hidden; }
                 EditorUserBuildSettings.iOSBuildConfigType = iOSBuildType.Release;
             #endif
 
+            Il2CppCompilerConfiguration compilerConfig = isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug;
+            #if UNITY_2021_2_OR_NEWER
+                PlayerSettings.SetIl2CppCompilerConfiguration(UnityEditor.Build.NamedBuildTarget.iOS, compilerConfig);
+            #else
+                PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.iOS, compilerConfig);
+            #endif
+
             #if UNITY_2022_1_OR_NEWER
-                PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.iOS, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.iOS, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
             #elif UNITY_2021_2_OR_NEWER
-                PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.iOS, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 EditorUserBuildSettings.il2CppCodeGeneration = UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize;
             #endif
 
