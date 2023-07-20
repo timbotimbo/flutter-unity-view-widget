@@ -13,6 +13,8 @@ import android.widget.FrameLayout
 import com.unity3d.player.IUnityPlayerLifecycleEvents
 import com.unity3d.player.UnityPlayer
 import java.util.concurrent.CopyOnWriteArraySet
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.KMutableProperty
 
 
 class UnityPlayerUtils {
@@ -63,6 +65,18 @@ class UnityPlayerUtils {
 
             try {
                 unityPlayer = CustomUnityPlayer(activity!!, ule)
+                
+                /* 
+                  check if the Main Activity contains an "mUnityPlayer" property, and assign it when possible.
+                  This fixes the AndroidJavaProxy on unity versions that expect mUnityPlayer to exist on the Activity.
+                  The user is expected to add this property to their MainActivity.
+                */
+                val unityActivityProperty = activity!!::class.memberProperties.firstOrNull {it.name == "mUnityPlayer"}
+                if (unityActivityProperty !== null && unityActivityProperty is KMutableProperty<*>) {
+                    (unityActivityProperty as KMutableProperty<*>)?.setter.call(activity!!, (unityPlayer as java.lang.Object?))
+                }
+                
+
                 // unityPlayer!!.z = (-1).toFloat()
                 // addUnityViewToBackground(activity!!)
                 unityLoaded = true

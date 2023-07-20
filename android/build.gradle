@@ -59,6 +59,7 @@ dependencies {
     implementation(name: 'unity-classes', ext:'jar')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.lifecycle:lifecycle-common:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
