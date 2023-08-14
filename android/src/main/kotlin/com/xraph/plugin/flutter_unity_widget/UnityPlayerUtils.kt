@@ -73,7 +73,7 @@ class UnityPlayerUtils {
                 */
                 val unityActivityProperty = activity!!::class.memberProperties.firstOrNull {it.name == "mUnityPlayer"}
                 if (unityActivityProperty !== null && unityActivityProperty is KMutableProperty<*>) {
-                    (unityActivityProperty as KMutableProperty<*>)?.setter.call(activity!!, (unityPlayer as java.lang.Object?))
+                    (unityActivityProperty as KMutableProperty<*>)?.setter?.call(activity!!, (unityPlayer as java.lang.Object?))
                 }
                 
 
