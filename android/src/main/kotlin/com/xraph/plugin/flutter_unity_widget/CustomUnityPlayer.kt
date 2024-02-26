@@ -8,6 +8,7 @@ import android.view.InputDevice
 import android.view.MotionEvent
 import com.unity3d.player.IUnityPlayerLifecycleEvents
 import com.unity3d.player.UnityPlayer
+import java.lang.reflect.Method
 
 @SuppressLint("NewApi")
 class CustomUnityPlayer(context: Activity, upl: IUnityPlayerLifecycleEvents?) : UnityPlayer(context, upl) {
@@ -47,6 +48,20 @@ class CustomUnityPlayer(context: Activity, upl: IUnityPlayerLifecycleEvents?) : 
 
         event.source = InputDevice.SOURCE_TOUCHSCREEN
         return super.onTouchEvent(event)
+    }
+
+    // Unity 2021.3.31+ and 2022.3.10+ try to call this private function, which throws an error on Android <= 8. https://github.com/juicycleff/flutter-unity-view-widget/issues/926
+    fun hidePreservedContent() {
+        Log.i(LOG_TAG, "hidePreservedContent")
+
+        // manually call the private function using reflection.
+        UnityPlayer::class.java.declaredMethods
+        .find { it.name == "hidePreservedContent" }
+        ?.let {
+            it.isAccessible = true
+            it.invoke(this)
+        }
+    
     }
 
 }
