@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import com.unity3d.player.UnityPlayerActivity
+import com.unity3d.player.UnityPlayerForActivityOrService
 import java.util.Objects
 
 class OverrideUnityActivity : UnityPlayerActivity() {
