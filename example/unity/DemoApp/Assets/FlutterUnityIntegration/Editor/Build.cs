@@ -208,7 +208,10 @@ namespace FlutterUnityIntegration.Editor
                 // remove this line if you don't use a debugger and you want to speed up the flutter build
                 playerOptions.options = BuildOptions.AllowDebugging | BuildOptions.Development;
             }
-            #if UNITY_2022_1_OR_NEWER
+            #if UNITY_6000_0_OR_NEWER
+                PlayerSettings.SetIl2CppCompilerConfiguration(UnityEditor.Build.NamedBuildTarget.Android, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
+                PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.Android, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
+            #elif UNITY_2022_1_OR_NEWER
                 PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.Android, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.Android, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
             #elif UNITY_2021_2_OR_NEWER
@@ -216,6 +219,11 @@ namespace FlutterUnityIntegration.Editor
                 EditorUserBuildSettings.il2CppCodeGeneration = UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize;
             #endif
 
+
+#if UNITY_ANDROID && UNITY_6000_0_OR_NEWER
+           // UnityEditor.Android.UserBuildSettings.DebugSymbols.level = Unity.Android.Types.DebugSymbolLevel.None;
+            UnityEditor.Android.UserBuildSettings.DebugSymbols.format = Unity.Android.Types.DebugSymbolFormat.LegacyExtensions;
+#endif
             // Switch to Android standalone build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
             // build addressable
@@ -330,7 +338,11 @@ body { padding: 0; margin: 0; overflow: hidden; }
             buildText = buildText.Replace("enableSplit = true", "enable true");
             buildText = buildText.Replace("implementation fileTree(dir: 'libs', include: ['*.jar'])", "implementation(name: 'unity-classes', ext:'jar')");
             buildText = buildText.Replace(" + unityStreamingAssets.tokenize(', ')", "");
-            buildText = Regex.Replace(buildText, "ndkPath \".*\"", "");
+            buildText = Regex.Replace(buildText, "ndkPath \".*\"", "// $0");
+
+            // Untiy 6000
+            buildText = Regex.Replace(buildText, @"apply from: '\.\./shared/keepUnitySymbols.gradle'", "// $0");
+            
 
             // check for namespace definition (Android gradle plugin 8+), add a backwards compatible version if it is missing.
             if(!buildText.Contains("namespace")) 
@@ -404,7 +416,10 @@ body { padding: 0; margin: 0; overflow: hidden; }
                 EditorUserBuildSettings.iOSBuildConfigType = iOSBuildType.Release;
             #endif
 
-            #if UNITY_2022_1_OR_NEWER
+            #if UNITY_6000_0_OR_NEWER
+                PlayerSettings.SetIl2CppCompilerConfiguration(UnityEditor.Build.NamedBuildTarget.Android, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
+                PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.Android, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
+            #elif UNITY_2022_1_OR_NEWER
                 PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.iOS, isReleaseBuild ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
                 PlayerSettings.SetIl2CppCodeGeneration(UnityEditor.Build.NamedBuildTarget.iOS, UnityEditor.Build.Il2CppCodeGeneration.OptimizeSize);
             #elif UNITY_2021_2_OR_NEWER
