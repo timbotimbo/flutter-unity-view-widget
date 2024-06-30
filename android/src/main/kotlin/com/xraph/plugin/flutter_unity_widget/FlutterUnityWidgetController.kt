@@ -45,7 +45,7 @@ class FlutterUnityWidgetController(
     private val methodChannel: MethodChannel
 
     private var methodChannelResult: MethodChannel.Result? = null
-    private var view: FrameLayout
+    private var view: CustomFrameLayout
     private var disposed: Boolean = false
     private var attached: Boolean = false
     private var loadedCallbackPending: Boolean = false
@@ -56,7 +56,7 @@ class FlutterUnityWidgetController(
         var tempContext = UnityPlayerUtils.activity as Context
         if (context != null) tempContext = context
         // set layout view
-        view = FrameLayout(tempContext)
+        view = CustomFrameLayout(tempContext)
         view.setBackgroundColor(Color.TRANSPARENT)
 
         // setup method channel
@@ -363,6 +363,10 @@ class FlutterUnityWidgetController(
             }
         }
         view.requestLayout()
+
+        // Resume unity when one unity view is popped and the previous is reattached
+        // In Unity < 2023 this was likely triggered by CustomUnityPlayer onAttachedToWindow
+        refocusUnity()
     }
 
     /// Reference solution to Google Maps implementation
