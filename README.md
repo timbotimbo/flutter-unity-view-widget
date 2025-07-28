@@ -39,13 +39,13 @@ This plugin requires Flutter >= 3.3.0
 First depend on the library by adding this to your packages `pubspec.yaml`:
 ```yaml
 dependencies:
-  flutter_unity_widget: ^2022.2.1 # use the latest compatible version
+  flutter_unity_widget_2: ^2022.2.2 # use the latest compatible version
 ```
 
 Now inside your Dart code you can import it.
 
 ```dart
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 ```
 
 You will need to open and export a Unity project, even for running the example. Your build will fail if you only include the widget in Flutter!
@@ -188,9 +188,9 @@ This requires a flutter_unity_widget version that is newer than 2022.2.1.
 ```diff
      dependencies {
          // build.gradle
-+        implementation project(':flutter_unity_widget')
++        implementation project(':flutter_unity_widget_2')
          // build.gradle.kts (Flutter 3.29+)
-+        implementation(project(":flutter_unity_widget"))
++        implementation(project(":flutter_unity_widget_2"))
      }
 ```
 - 3.2. Edit your android MainActivity file.  
@@ -342,7 +342,7 @@ allprojects {
 ```diff
      import UIKit
      import Flutter
-+    import flutter_unity_widget
++    import flutter_unity_widget_2
 
      @UIApplicationMain
      @objc class AppDelegate: FlutterAppDelegate {
@@ -360,7 +360,7 @@ allprojects {
 
    3.2. If you're using Objective-C, open the *ios/Runner/main.m* file and change the following:
 ```diff
-+    #import "flutter_unity_widget.swift.h"
++    #import "flutter_unity_widget_2.swift.h"
 
      int main(int argc, char * argv[]) {
           @autoreleasepool {
@@ -590,7 +590,7 @@ If you computer does not have an ARM processor, like most computers running on I
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 
 void main() {
   runApp(
@@ -647,7 +647,7 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 
 void main() => runApp(const MyApp());
 

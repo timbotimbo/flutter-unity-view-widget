@@ -1,4 +1,4 @@
-import 'package:flutter_unity_widget/src/helpers/types.dart';
+import 'package:flutter_unity_widget_2/src/helpers/types.dart';
 
 /// Error thrown when an unknown unity ID is provided to a method channel API.
 class UnknownUnityIDError extends Error {

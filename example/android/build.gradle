@@ -25,7 +25,7 @@ subprojects {
         if (project.plugins.hasPlugin("com.android.application")
                 || project.plugins.hasPlugin("com.android.library")) {
 
-            if (project.name == "flutter_unity_widget") {
+            if (project.name == "flutter_unity_widget_2") {
                 project.android {
                     // add namespace if it is missing
                     if (namespace == null) {
