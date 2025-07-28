@@ -1,14 +1,74 @@
-# flutter_unity_widget
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+# flutter_unity_widget_2
+This plugin is a fork of [flutter_unity_widget](https://pub.dev/packages/flutter_unity_widget), which is outdated on pub.dev.
 
-[![version][version-badge]][package]
-[![MIT License][license-badge]][license]
-[![PRs Welcome][prs-badge]](https://makeapullrequest.com)
+The aim of this fork is to publish bug fixes and improve compatibility with newer Flutter and Unity versions.  
+These changes come from the master branch of the original [Github repo](https://github.com/juicycleff/flutter-unity-view-widget), which is far ahead of it's latest pub.dev release.  
 
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
 
-[![Gitter](https://badges.gitter.im/flutter-unity/community.svg)](https://gitter.im/flutter-unity/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+Don't expect major new features or rewrites for now, as this plugin will try to stick close to the original.  
+If you are looking for a full rewrite of the Unity integration, try [flutter_embed_unity](https://pub.dev/packages/flutter_embed_unity) instead.
+
+
+* Plugin versions `2022.x.y` should support Unity 2019.4 up to Unity 2022.3.  
+  The main focus is on Unity 2022.3 LTS.
+* Plugin versions `6000.x.y` support Unity 6 and up.
+
+
+This plugin works with the same [unitypackages](https://github.com/juicycleff/flutter-unity-view-widget/tree/master/unitypackages) as the original plugin.
+
+<br />
+
+
+
+For now, most of the original readme is included below for documentation.
+I might expand on this later.
+
+
+## Migration from flutter_unity_widget
+I've tried to keep most internal classes identical, to keep migrating to the fork simple.  
+
+You just need to rename the plugin by adding `_2` in several files in your project:
+
+1. `pubspec.yaml`
+```diff
+dependencies:
+-  flutter_unity_widget: ^2022.2.1
++  flutter_unity_widget_2: ^2022.2.2
+```
+
+2. Dart files in your Flutter project.
+```diff
+- import 'package:flutter_unity_widget/flutter_unity_widget.dart';
++ import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
+```
+
+3. Your `android/app/build.gradle`file.
+```diff
+// android/app/build.gradle
+-  implementation project(':flutter_unity_widget')
++  implementation project(':flutter_unity_widget_2')
+
+// android/app/build.gradle.kts (Flutter 3.29+)
+-  implementation(project(":flutter_unity_widget"))
++  implementation(project(":flutter_unity_widget_2"))
+```
+
+4. Your `ios/Runner/AppDelegate.swift`.
+```diff
+- import flutter_unity_widget
++ import flutter_unity_widget_2
+```
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+# Original Readme
+
 [![Discord](https://img.shields.io/badge/Discord-blue?style=for-the-badge)](https://discord.gg/KmMqD7Sv3K)
 
 Flutter unity 3D widget for embedding unity in flutter. Now you can make awesome gamified features of your app in Unity and get it rendered in a Flutter app both in fullscreen and embeddable mode. Works great on `Android, iPad OS, iOS, Web`.
@@ -19,14 +79,10 @@ Flutter unity 3D widget for embedding unity in flutter. Now you can make awesome
 - Use Windows or Mac to export and build your project.  
   Users on Ubuntu have reported a lot of errors in the Unity export.
 - Emulator support is limited and requires special setup. Please use a physical device for Android and iOS.
-- Supports Unity 2019.4.3 up to 2022.3.x, we recommend the latest 2022.3 LTS.  
-  Check [this github issue](https://github.com/juicycleff/flutter-unity-view-widget/issues/967) for support of Unity 6.  
 - Use only OpenGLES3 as Graphics API on Android for AR compatibility.  
 - Windows isn't supported because of the lack of [Flutter PlatformView support](https://github.com/flutter/flutter/issues/31713).  
 
 ## Notice
-Need me to respond, tag me [Rex Isaac Raphael](https://github.com/juicycleff). 
-
 This plugin expects you to atleast know how to use Unity Engine. If you have issues with how unity widget is presented, you can please modify your unity project build settings as you seem fit.
 
 Moving forward, versioning of the package will change to match unity releases after proper test. Mind you this does not mean the package
@@ -39,13 +95,13 @@ This plugin requires Flutter >= 3.3.0
 First depend on the library by adding this to your packages `pubspec.yaml`:
 ```yaml
 dependencies:
-  flutter_unity_widget: ^2022.2.1 # use the latest compatible version
+  flutter_unity_widget_2: ^2022.2.2 # use the latest compatible version
 ```
 
 Now inside your Dart code you can import it.
 
 ```dart
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 ```
 
 You will need to open and export a Unity project, even for running the example. Your build will fail if you only include the widget in Flutter!
@@ -180,7 +236,6 @@ Check the **Minimum API Level** setting in the Unity player settings, and match 
 The Unity widget will function without this step, but some Unity plugins like ArFoundation will throw `mUnityPlayer` errors on newer Unity versions.  
 
     This is needed for Unity 2020.3.46+, 2021.3.19 - 2021.3.20 and 2022.2.4 - 2022.3.18.  
-This requires a flutter_unity_widget version that is newer than 2022.2.1.  
 
 
 - 3.1. Open the `android/app/build.gradle` file and add the following:
@@ -188,9 +243,9 @@ This requires a flutter_unity_widget version that is newer than 2022.2.1.
 ```diff
      dependencies {
          // build.gradle
-+        implementation project(':flutter_unity_widget')
++        implementation project(':flutter_unity_widget_2')
          // build.gradle.kts (Flutter 3.29+)
-+        implementation(project(":flutter_unity_widget"))
++        implementation(project(":flutter_unity_widget_2"))
      }
 ```
 - 3.2. Edit your android MainActivity file.  
@@ -342,7 +397,7 @@ allprojects {
 ```diff
      import UIKit
      import Flutter
-+    import flutter_unity_widget
++    import flutter_unity_widget_2
 
      @UIApplicationMain
      @objc class AppDelegate: FlutterAppDelegate {
@@ -360,7 +415,7 @@ allprojects {
 
    3.2. If you're using Objective-C, open the *ios/Runner/main.m* file and change the following:
 ```diff
-+    #import "flutter_unity_widget.swift.h"
++    #import "flutter_unity_widget_2.swift.h"
 
      int main(int argc, char * argv[]) {
           @autoreleasepool {
@@ -590,7 +645,7 @@ If you computer does not have an ARM processor, like most computers running on I
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 
 void main() {
   runApp(
@@ -647,7 +702,7 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:flutter_unity_widget_2/flutter_unity_widget_2.dart';
 
 void main() => runApp(const MyApp());
 
@@ -1020,32 +1075,6 @@ Stack(
 
 We already integrated this into our [Examples](/example/lib/screens/) in the `/example` folder.
 
-
-#### Sponsors
-
-Support this project with your organization. Your donations will be used to help children first and then those in need. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/ultimate-backend/contribute)]
-
-<a href="https://opencollective.com/ultimate-backend/sponsor/0/website"><img src="https://opencollective.com/ultimate-backend/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/1/website"><img src="https://opencollective.com/ultimate-backend/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/2/website"><img src="https://opencollective.com/ultimate-backend/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/3/website"><img src="https://opencollective.com/ultimate-backend/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/4/website"><img src="https://opencollective.com/ultimate-backend/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/5/website"><img src="https://opencollective.com/ultimate-backend/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/6/website"><img src="https://opencollective.com/ultimate-backend/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/7/website"><img src="https://opencollective.com/ultimate-backend/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/8/website"><img src="https://opencollective.com/ultimate-backend/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/ultimate-backend/sponsor/9/website"><img src="https://opencollective.com/ultimate-backend/sponsor/9/avatar.svg"></a>
-
-[version-badge]: https://img.shields.io/pub/v/flutter_unity_widget.svg?style=flat-square
-[package]: https://pub.dartlang.org/packages/flutter_unity_widget/
-[license-badge]: https://img.shields.io/github/license/juicycleff/flutter-unity-view-widget.svg?style=flat-square
-[license]: https://github.com/juicycleff/flutter-unity-view-widget/blob/master/LICENSE
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs]: https://makeapullrequest.com
-[github-watch-badge]: https://img.shields.io/github/watchers/juicycleff/flutter-unity-view-widget.svg?style=social
-[github-watch]: https://github.com/juicycleff/flutter-unity-view-widget/watchers
-[github-star-badge]: https://img.shields.io/github/stars/juicycleff/flutter-unity-view-widget.svg?style=social
-[github-star]: https://github.com/juicycleff/flutter-unity-view-widget/stargazers
 
 ## Contributors ✨
 
