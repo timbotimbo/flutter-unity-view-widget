@@ -1,11 +1,13 @@
 name: flutter_unity_widget_2
-description: Flutter Unity 3D widget for embedding Unity game scenes in flutter. This library now supports Unity as a Library.
+description: Flutter Unity 3D widget for embedding Unity game scenes in Flutter. An updated fork of flutter_unity_widget.
 version: 6000.0.0
 #authors:
 #  - Rex Raphael <rex.raphael@outlook.com>
 #  - Thomas Stockx <thomas@stockxit.com>
 #  - Kris Pypen <kris.pypen@gmail.com>
-homepage: https://github.com/juicycleff/flutter-unity-view-widget/tree/master
+homepage: https://github.com/juicycleff/flutter-unity-view-widget
+repository: https://github.com/juicycleff/flutter-unity-view-widget
+issue_tracker: https://github.com/juicycleff/flutter-unity-view-widget/issues
 
 environment:
   sdk: ">=2.16.0 <4.0.0"
