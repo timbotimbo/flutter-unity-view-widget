@@ -23,6 +23,31 @@ This plugin works with the same [unitypackages](https://github.com/juicycleff/fl
 For now, most of the original readme is included below for documentation.
 I might expand on this later.
 
+## Migration from Unity 2022 to Unity 6.
+The 6000 version is currently based on a 6000 branch in the original repo. See [this issue](https://github.com/juicycleff/flutter-unity-view-widget/issues/967) for more details.
+
+In short:  
+1. Follow the regular android setup like in the readme.  
+But for Android ignore setting `ndk.dir=` in `local.properties`.  
+Use the `ndkVersion = "<ndk version number here>"` in build.gradle approach.
+
+1. Your Flutter project will need to use Java 17 and gradle 8.x to match the versions used by Unity. 
+
+Try to match or exceed these gradle and AGP versions:
+
+| Unity Version                     | Gradle Version  | Android Gradle Plug-in Version | NDK                  | JDK |
+|-----------------------------------|-----------------|--------------------------------|----------------------|-----|
+| 6000.0.45f1+ 	                    | 8.11            | 8.7.2                          | r27c (27.2.12479018) | 17  |
+| 6000.0.1f1 - 6000.0.44f1          | 8.4             | 8.3.0                          | r27c (27.2.12479018) | 17  |
+
+Check [the Unity documentation](https://docs.unity3d.com/6000.0/Documentation/Manual/android-gradle-version-compatibility.html) for any updates. You can change the editor version in the top left.
+
+
+3. Make sure to import a 6000.0.x unitypackage into your Unity project. The export scripts have been updated.
+
+2. Make sure to delete any old exports in `ios/UnityLibrary` and `android/unityLibrary` before making a new export.
+
+
 
 ## Migration from flutter_unity_widget
 I've tried to keep most internal classes identical, to keep migrating to the fork simple.  
@@ -33,7 +58,7 @@ You just need to rename the plugin by adding `_2` in several files in your proje
 ```diff
 dependencies:
 -  flutter_unity_widget: ^2022.2.1
-+  flutter_unity_widget_2: ^2022.2.2
++  flutter_unity_widget_2: ^2022.2.2 # use ^6000.0.0 for Unity 6.x
 ```
 
 2. Dart files in your Flutter project.
