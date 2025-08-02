@@ -86,14 +86,14 @@ class MethodChannelUnityWidget extends UnityWidgetPlatform {
         _unityStreamController.add(UnityMessageEvent(unityId, call.arguments));
         break;
       case "events#onUnityUnloaded":
-        _unityStreamController.add(UnityLoadedEvent(unityId, call.arguments));
+        _unityStreamController.add(UnityLoadedEvent(unityId));
         break;
       case "events#onUnitySceneLoaded":
         _unityStreamController.add(UnitySceneLoadedEvent(
             unityId, SceneLoaded.fromMap(call.arguments)));
         break;
       case "events#onUnityCreated":
-        _unityStreamController.add(UnityCreatedEvent(unityId, call.arguments));
+        _unityStreamController.add(UnityCreatedEvent(unityId));
         break;
       default:
         throw UnimplementedError("Unimplemented ${call.method} method");
