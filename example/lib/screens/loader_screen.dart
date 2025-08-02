@@ -82,12 +82,12 @@ class _LoaderScreenState extends State<LoaderScreen> {
     );
   }
 
-  void onUnityMessage(message) {
+  void onUnityMessage(dynamic message) {
     print('Received message from unity: ${message.toString()}');
   }
 
   // Callback that connects the created controller to the unity controller
-  void onUnityCreated(controller) {
+  void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
   }
 }

@@ -97,7 +97,7 @@ class WebUnityWidgetController extends UnityWidgetController {
     return channel;
   }
 
-  _registerEvents() {
+  void _registerEvents() {
     if (kIsWeb) {
       html.window.addEventListener('message', (event) {
         final raw = (event as html.MessageEvent).data.toString();
@@ -289,6 +289,7 @@ class WebUnityWidgetController extends UnityWidgetController {
     _onUnityUnloadedSub = null;
   }
 
+  @override
   void dispose() {
     _cancelSubscriptions();
     if (kIsWeb) {

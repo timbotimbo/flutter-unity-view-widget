@@ -158,6 +158,7 @@ class MethodChannelUnityWidget extends UnityWidgetPlatform {
     bool? unityWebSource,
     String? unitySrcUrl,
   }) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final String _viewType = 'plugin.xraph.com/unity_view';
 
     if (useAndroidViewSurf != null) useAndroidViewSurface = useAndroidViewSurf;

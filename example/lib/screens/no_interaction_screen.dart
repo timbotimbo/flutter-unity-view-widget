@@ -75,7 +75,7 @@ class _NoInteractionScreenState extends State<NoInteractionScreen> {
     );
   }
 
-  void onUnityMessage(message) {
+  void onUnityMessage(dynamic message) {
     print('Received message from unity: ${message.toString()}');
   }
 
@@ -89,7 +89,7 @@ class _NoInteractionScreenState extends State<NoInteractionScreen> {
   }
 
   // Callback that connects the created controller to the unity controller
-  void _onUnityCreated(controller) {
+  void _onUnityCreated(UnityWidgetController controller) {
     controller.resume();
     _unityWidgetController = controller;
   }

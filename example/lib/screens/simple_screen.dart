@@ -91,7 +91,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
     );
   }
 
-  void onUnityMessage(message) {
+  void onUnityMessage(dynamic message) {
     print('Received message from unity: ${message.toString()}');
   }
 
@@ -105,7 +105,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
   }
 
   // Callback that connects the created controller to the unity controller
-  void _onUnityCreated(controller) {
+  void _onUnityCreated(UnityWidgetController controller) {
     controller.resume();
     _unityWidgetController = controller;
   }
