@@ -15,7 +15,7 @@
 * [Android] [iOS] Exports require unitypackage `fuw-6000.0.x` or newer.  
 * Delete existing export folders like`android/unityLibrary` or `ios/UnityLibrary`when you upgrade your Unity version.
 
-## 2022.3.0 (master branch)
+## 2022.3.0
 * [Web] Switch to `package:web` to support WebAssembly (WASM).
 * Updates minimum supported SDK version to Flutter 3.16/Dart 3.2.
 * Fix lint warnings to improve static analysis.
