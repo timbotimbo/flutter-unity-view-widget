@@ -5,8 +5,7 @@ version: 6000.0.0
 #  - Rex Raphael <rex.raphael@outlook.com>
 #  - Thomas Stockx <thomas@stockxit.com>
 #  - Kris Pypen <kris.pypen@gmail.com>
-homepage: https://github.com/juicycleff/flutter-unity-view-widget
-repository: https://github.com/juicycleff/flutter-unity-view-widget
+repository: https://github.com/timbotimbo/flutter-unity-view-widget/tree/flutter_unity_widget_2
 issue_tracker: https://github.com/juicycleff/flutter-unity-view-widget/issues
 
 environment:
