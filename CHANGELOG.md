@@ -1,3 +1,12 @@
+## 2022.3.0
+* [Web] Switch to `package:web` to support WebAssembly (WASM).
+* Updates minimum supported SDK version to Flutter 3.16/Dart 3.2.
+* Fix lint warnings to improve static analysis.
+* Small ReadMe fixes.
+
+**Note:**  
+> This release is unrelated to an old version `2022.3.0-alpha1` of `flutter_unity_widget`.
+
 ## 2022.2.2
 * [Android] Fix touch detection when using Unity's New Input System. [#938](https://github.com/juicycleff/flutter-unity-view-widget/pull/938)
 * [Android] Workaround for mUnityplayer error in Unity plugins using the AndroidJavaProxy. [#908](https://github.com/juicycleff/flutter-unity-view-widget/pull/908)
