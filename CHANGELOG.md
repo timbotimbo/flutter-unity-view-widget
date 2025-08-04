@@ -1,5 +1,12 @@
+## 6000.1.0
+> Includes the same changes as 2022.3.0
+* [Web] Switch to `package:web` to support WebAssembly (WASM).
+* Updates minimum supported SDK version to Flutter 3.16/Dart 3.2.
+* Fix lint warnings to improve static analysis.
+* Small ReadMe fixes.
+
 ## 6000.0.0
-* Includes all fixes up to 2022.2.2.
+* Includes all fixes up to 2022.2.2.  
 
 **Breaking changes**
 * [Android] This plugin now requires an export from Unity 6000.0 or newer.   
@@ -8,6 +15,14 @@
 * [Android] [iOS] Exports require unitypackage `fuw-6000.0.x` or newer.  
 * Delete existing export folders like`android/unityLibrary` or `ios/UnityLibrary`when you upgrade your Unity version.
 
+## 2022.3.0 (master branch)
+* [Web] Switch to `package:web` to support WebAssembly (WASM).
+* Updates minimum supported SDK version to Flutter 3.16/Dart 3.2.
+* Fix lint warnings to improve static analysis.
+* Small ReadMe fixes.
+
+**Note:**  
+> This release is unrelated to an old version `2022.3.0-alpha1` of `flutter_unity_widget`.
 
 
 ## 2022.2.2
