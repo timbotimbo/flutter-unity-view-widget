@@ -14,7 +14,7 @@ If you are looking for a full rewrite of the Unity integration, try [flutter_emb
 * Plugin versions `6000.x.y` support Unity 6 and up.
 
 
-This plugin works with the same [unitypackages](https://github.com/juicycleff/flutter-unity-view-widget/tree/master/unitypackages) as the original plugin.
+This plugin works with the same [unitypackages](https://github.com/timbotimbo/flutter-unity-view-widget/tree/flutter_unity_widget_2/unitypackages) as the original plugin.
 
 <br />
 
@@ -26,9 +26,12 @@ I might expand on this later.
 ## Migration from Unity 2022 to Unity 6.
 The 6000 version is currently based on a 6000 branch in the original repo. See [this issue](https://github.com/juicycleff/flutter-unity-view-widget/issues/967) for more details.
 
+Make sure to import a new unitypackage of version 6000.x.y. 
+
+### Android
 In short:  
 1. Follow the regular android setup like in the readme.  
-But for Android ignore setting `ndk.dir=` in `local.properties`.  
+But for Android do **NOT** use `ndk.dir=` in `local.properties`.  
 Use the `ndkVersion = "<ndk version number here>"` in build.gradle approach.
 
 1. Your Flutter project will need to use Java 17 and gradle 8.x to match the versions used by Unity. 
@@ -37,8 +40,12 @@ Try to match or exceed these gradle and AGP versions:
 
 | Unity Version                     | Gradle Version  | Android Gradle Plug-in Version | NDK                  | JDK |
 |-----------------------------------|-----------------|--------------------------------|----------------------|-----|
-| 6000.0.45f1+ 	                    | 8.11            | 8.7.2                          | r27c (27.2.12479018) | 17  |
+| 6000.2 - 6000.3+                  | 8.13            | 8.10.0                         | r27c (27.2.12479018) | 17  |
+| 6000.0.61f1+                      | 8.13            | 8.10.0                         | r27c (27.2.12479018) | 17  |
+| 6000.0.45f1 - 6000.0.60f1         | 8.11            | 8.7.2                          | r27c (27.2.12479018) | 17  |
 | 6000.0.1f1 - 6000.0.44f1          | 8.4             | 8.3.0                          | r27c (27.2.12479018) | 17  |
+| 2022.3.38f1+                      | 7.5.1           | 7.4.2                          | r23b (23.1.7779620)  | 11  |
+| 2022.3.0f1 - 2022.3.37f1          | 7.2             | 7.1.2                          | r23b (23.1.7779620)  | 11  |
 
 Check [the Unity documentation](https://docs.unity3d.com/6000.0/Documentation/Manual/android-gradle-version-compatibility.html) for any updates. You can change the editor version in the top left.
 
@@ -58,7 +65,7 @@ You just need to rename the plugin by adding `_2` in several files in your proje
 ```diff
 dependencies:
 -  flutter_unity_widget: ^2022.2.1
-+  flutter_unity_widget_2: ^2022.2.2 # use ^6000.0.0 for Unity 6.x
++  flutter_unity_widget_2: ^2022.3.0 # use ^6000.1.0 for Unity 6.x
 ```
 
 2. Dart files in your Flutter project.
@@ -120,7 +127,8 @@ This plugin requires Flutter >= 3.16.0.
 First depend on the library by adding this to your packages `pubspec.yaml`:
 ```yaml
 dependencies:
-  flutter_unity_widget_2: ^2022.2.2 # use the latest compatible version
+  flutter_unity_widget_2: ^2022.3.0 # use the latest compatible version
+                        # use ^6000.1.0 for Unity 6.x
 ```
 
 Now inside your Dart code you can import it.
@@ -152,8 +160,9 @@ the platform name (Android or iOS). You can click on its icon to expand it.
 
 - An existing Unity project (if there is none, you can [create a new one](https://learn.unity.com/tutorial/create-your-first-unity-project)).
 
-- A `fuw-XXXX.unitypackage` file, found in the [*unitypackages*](https://github.com/juicycleff/flutter-unity-view-widget/tree/master/unitypackages) folder.
+- A `fuw-XXXX.unitypackage` file, found in the [*unitypackages*](https://github.com/timbotimbo/flutter-unity-view-widget/tree/flutter_unity_widget_2/unitypackages) folder.
 Try to use the most recent unitypackage available.
+Alternatively, you can install the unitypackage using the Unity package manager.
 
 ### Unity versions for  publishing
 If you want to publish your app for Android or iOS, you need to satisfy certain Unity version requirements.
@@ -164,13 +173,13 @@ Apple's [privacy manifest requirements](https://discussions.unity.com/t/apple-pr
 * 2022.3.18+
 * 6000.0.0+
 
-**Android**  
-> Starting November 1st, 2025, all new apps and updates to existing apps submitted to Google Play and targeting Android 15+ devices must support 16 KB page sizes.
 
-This requires [Unity versions](https://discussions.unity.com/t/info-unity-engine-support-for-16-kb-memory-page-sizes-android-15/1589588):
-* 2021.3.48+ (Enterprise and Industry only)
-* 2022.3.56+
-* 6000.0.38+
+**Android**  
+Due to a [security advisory](https://unity.com/security/sept-2025-01) the minimal Unity versions are:
+* 2021.3.56f2+
+* 2022.3.67f2+
+* 6000.0.58f2+
+* 6000.2.6f2
 
 
 ### Unity project setup
