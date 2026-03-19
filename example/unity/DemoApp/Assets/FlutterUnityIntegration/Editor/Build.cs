@@ -8,9 +8,11 @@ using UnityEngine;
 using Application = UnityEngine.Application;
 using BuildResult = UnityEditor.Build.Reporting.BuildResult;
 
+#if USING_ADDRESSABLES
 // uncomment for addressables
-//using UnityEditor.AddressableAssets;
-//using UnityEditor.AddressableAssets.Settings;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+#endif
 
 namespace FlutterUnityIntegration.Editor
 {
@@ -27,6 +29,13 @@ namespace FlutterUnityIntegration.Editor
 
         private bool _pluginMode = false;
         private static string _persistentKey = "flutter-unity-widget-pluginMode";
+
+        private const string USING_ADDRESSABLES = "USING_ADDRESSABLES";
+        private static string _persistentKeyHasAddressable = "flutter-unity-widget-hasAddressable";
+        private static bool _usingAddressables = false;
+        
+        bool hasChanges = false;
+
 
         //#region GUI Member Methods
         [MenuItem("Flutter/Export Android (Debug) %&n", false, 101)]
@@ -101,12 +110,53 @@ namespace FlutterUnityIntegration.Editor
             {
                 EditorPrefs.SetBool(_persistentKey, _pluginMode);
             }
+            
+            using (new EditorGUILayout.HorizontalScope())
+            {
+
+                EditorGUI.BeginChangeCheck();
+                _usingAddressables = EditorGUILayout.Toggle("Using Addressables", _usingAddressables);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    EditorPrefs.SetBool(_persistentKeyHasAddressable, _usingAddressables);
+                    hasChanges = true;
+                    Repaint();
+                }
+
+                if (GUILayout.Button("Apply Symbols"))
+                {
+                    if (hasChanges)
+                    {
+                        Apply();
+                        Repaint();
+                    }
+                    else
+                    {
+                        Debug.Log("No Changes required!");
+                    }
+                }
+            }
+            
+        }
+        
+        private void Apply()
+        {
+            EditorApplication.delayCall += () => {
+                SymbolDefineHelper.SetScriptingDefine(USING_ADDRESSABLES, _usingAddressables);
+            };
+            Close();
         }
 
         private void OnEnable()
         {
-            _pluginMode = EditorPrefs.GetBool(_persistentKey, false);
+            InitPrefs();
         }
+        private  void InitPrefs()
+        {
+            _pluginMode = EditorPrefs.GetBool(_persistentKey, false);
+            _usingAddressables = EditorPrefs.GetBool(_persistentKeyHasAddressable, false);
+        }
+        
         //#endregion
 
 
@@ -246,6 +296,13 @@ namespace FlutterUnityIntegration.Editor
             {
                 Copy(sharedPath, Path.Combine(AndroidExportPath, "shared"));
             }
+
+            // Unity 6.2 requires unity.androidNdkPath and unity.androidSdkPath from gradle.properties.
+            // https://github.com/juicycleff/flutter-unity-view-widget/issues/1039
+#if UNITY_6000_2_OR_NEWER
+            // Copy gradle.properties from the Unity output to android/unityLibrary/
+            File.Copy(Path.Combine(APKPath, "gradle.properties"), Path.Combine(AndroidExportPath, "gradle.properties"), true);
+#endif
 
             // Modify build.gradle
             ModifyAndroidGradle(isPlugin);
@@ -537,7 +594,7 @@ body { padding: 0; margin: 0; overflow: hidden; }
 
         // uncomment for addressables
         private static void ExportAddressables() {
-            /*
+            #if USING_ADDRESSABLES
         Debug.Log("Start building player content (Addressables)");
         Debug.Log("BuildAddressablesProcessor.PreExport start");
 
@@ -550,7 +607,7 @@ body { padding: 0; margin: 0; overflow: hidden; }
 
         AddressableAssetSettings.BuildPlayerContent();
         Debug.Log("BuildAddressablesProcessor.PreExport done");
-        */
+        #endif
         }
 
 
