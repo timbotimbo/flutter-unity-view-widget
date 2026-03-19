@@ -1,12 +1,12 @@
 {
   "name": "com.xraph.flutterunitywidget",
-  "displayName": "Flutter Unity Widget",
+  "displayName": "Flutter Unity Widget 2",
   "version": "6000.1.0",
   "unity": "2019.4",
   "license": "BSD-3-Clause",
   "licensesUrl": "https://github.com/juicycleff/flutter-unity-view-widget/blob/master/LICENSE",
-  "documentationUrl": "https://github.com/juicycleff/flutter-unity-view-widget/tree/experimental/unity_6000",
-  "changelogUrl": "https://github.com/juicycleff/flutter-unity-view-widget/tree/experimental/unity_6000/unitypackages",
+  "documentationUrl": "https://github.com/timbotimbo/flutter-unity-view-widget/tree/flutter_unity_widget_2-6000",
+  "changelogUrl": "https://github.com/timbotimbo/flutter-unity-view-widget/tree/flutter_unity_widget_2-6000/unitypackages",
   "author": {
     "name": "xraph.com",
     "url": "https://github.com/juicycleff"
