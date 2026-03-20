@@ -1,10 +1,9 @@
 ﻿using System;
 using FlutterUnityIntegration;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Globalization;
 
-public class Rotate : MonoBehaviour, IEventSystemHandler
+public class Rotate : MonoBehaviour
 {
     [SerializeField]
     Vector3 RotateAmount;
