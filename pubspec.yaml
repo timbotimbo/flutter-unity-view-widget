@@ -8,8 +8,8 @@ version: 2022.3.0
 homepage: https://github.com/juicycleff/flutter-unity-view-widget/tree/master
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
-  flutter: ">=3.16.0"
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:

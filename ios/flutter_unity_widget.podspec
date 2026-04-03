@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_unity_widget'
-  s.version          = '4.0.0'
+  s.version          = '5.0.0'
   s.summary          = 'Flutter unity 3D widget for embedding unity in flutter'
   s.description      = <<-DESC
 A new Flutter plugin.
@@ -13,10 +13,10 @@ A new Flutter plugin.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Rex Isaac Raphael' => 'rex.raphael@outlook.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
-  s.public_header_files = 'Classes/**/*.h'
+  s.source_files = 'flutter_unity_widget/Sources/flutter_unity_widget/Classes/**/*'
+  s.public_header_files = 'flutter_unity_widget/Sources/flutter_unity_widget/Classes/**/*.h'
   s.dependency 'Flutter'
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '12.0'
   s.frameworks = 'UnityFramework'
 
   # Flutter.framework does not contain a i386 slice.
@@ -28,5 +28,5 @@ A new Flutter plugin.
      'OTHER_LDFLAGS' => '$(inherited) -framework UnityFramework ${PODS_LIBRARIES}'
   }
   
-  s.resource_bundles = {'flutter_unity_widget_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
+  s.resource_bundles = {'flutter_unity_widget_privacy' => ['flutter_unity_widget/Sources/flutter_unity_widget/PrivacyInfo.xcprivacy']}
 end
